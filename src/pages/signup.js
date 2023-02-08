@@ -7,9 +7,9 @@ const Signup = () => {
   const [hideConfirm, setHideConfirm] = useState(true);
 
   return (
-    <div className="flex flex-row items-center justify-between py-20 px-4 bg-[#faf9f9]">
-      <div className="ml-[80px] border-[0.5px] rounded-[10px] border-[#cfcfcf] bg-white">
-        <form className="py-10 px-8 w-[500px]">
+    <div className="flex flex-row items-center justify-center lg:justify-between py-20 px-7 bg-[#faf9f9]">
+      <div className="ml-[0px] lg:ml-[80px] border-[0.5px] rounded-[10px] border-[#cfcfcf] bg-white">
+        <form className="max-w-[500px] py-10 px-8">
           <p className="text-3xl mb-4 font-light">Welcome !</p>
           <h1 className="text-3xl mb-4 font-medium">Sign up to</h1>
           <p className="mb-4 text-base">Lorem Ipsum is simply</p>
@@ -87,8 +87,8 @@ const Signup = () => {
         </form>
       </div>
 
-      <div className="hidden lg:block w-[700px] h-[600px]">
-        <img src="/people.png" alt="people" className="w-full h-full" />
+      <div className="hidden lg:flex items-center justify-center w-[700px] h-[600px]">
+        <img src="/people.png" alt="people" className="w-full" />
       </div>
     </div>
   );
