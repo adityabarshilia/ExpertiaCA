@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContextProvider";
 
 const Signup = () => {
   const [hidePass, setHidePass] = useState(true);
   const [hideConfirm, setHideConfirm] = useState(true);
   const { auth, setAuth } = useContext(AuthContext);
+  const router = useRouter();
 
   //Form Inputs
   const [username, setUsername] = useState("");
@@ -35,6 +37,7 @@ const Signup = () => {
         if (res.data.user) {
           SignIn();
           alert("Signup successful!");
+          router.push("/");
         }
       } catch (err) {
         alert(err.response.data.message);

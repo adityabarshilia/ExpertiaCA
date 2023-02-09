@@ -3,10 +3,12 @@ import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import axios from "axios";
 import { AuthContext } from "@/context/AuthContextProvider";
+import { useRouter } from "next/router";
 
 const Signin = () => {
   const [hidePass, setHidePass] = useState(true);
   const { auth, setAuth } = useContext(AuthContext);
+  const router = useRouter();
 
   //Form Inputs
   const [username, setUsername] = useState("");
@@ -18,7 +20,8 @@ const Signin = () => {
       let res = await axios.post("/api/user/signin", { username, password });
       if (res.data.message == "Logged in") {
         setAuth(res.data);
-        return alert("Login successful");
+        alert("Login successful");
+        router.push("/");
       }
     } catch (err) {
       alert(err.response.data.message);
