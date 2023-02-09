@@ -7,8 +7,8 @@ const Signin = () => {
 
   return (
     <div className="flex flex-row items-center justify-center lg:justify-between py-20 px-7 bg-[#faf9f9]">
-      <div className="ml-[0px] lg:ml-[80px] border-[0.5px] rounded-[10px] border-[#cfcfcf] bg-white">
-        <form className="max-w-[500px] py-10 px-8">
+      <div className="ml-[0px] lg:ml-[80px] border-[0.5px] rounded-[10px] shadow-[0_4px_64px_rgba(0,0,0,0.05)] border-[#cfcfcf] bg-white">
+        <form className="max-w-[505px] py-10 px-8">
           <p className="text-[25px] leading-[37.5px] mb-4 font-light">
             Welcome !
           </p>
@@ -20,7 +20,7 @@ const Signin = () => {
           <input
             required
             type="text"
-            className="mb-4 p-7 border-[0.6px] mt-[10px] rounded-[6px] border-[#888888] h-10 w-full"
+            className="mb-4 p-4 border-[0.6px] mt-[10px] rounded-[6px] border-[#888888] w-full"
             placeholder="Enter your username"
           />
           <label>Password</label>
@@ -28,7 +28,7 @@ const Signin = () => {
             <input
               required
               type={hidePass ? "password" : "text"}
-              className="mb-4 p-7 border-[0.6px] mt-[10px] rounded-[6px] border-[#888888] h-10 w-full"
+              className="mb-4 p-4 border-[0.6px] mt-[10px] rounded-[6px] border-[#888888] w-full"
               placeholder="Enter your password"
             />
 
@@ -49,12 +49,19 @@ const Signin = () => {
 
           <div className="flex justify-between items-center mt-2 mb-6">
             <div className="flex justify-center items-center gap-[7px]">
-              <input className="cursor-pointer" type="checkbox" id="rememberme" name="rememberme" />
-              <label className="text-[12px] leading-[18px]" for="rememberme">
+              <input
+                className="cursor-pointer"
+                type="checkbox"
+                id="rememberme"
+                name="rememberme"
+              />
+              <label className="text-[12px] leading-[18px]" htmlFor="rememberme">
                 Remember me
               </label>
             </div>
-            <p className="text-[12px] leading-[18px] cursor-pointer">Forgot password ?</p>
+            <p className="text-[12px] leading-[18px] cursor-pointer">
+              Forgot password ?
+            </p>
           </div>
 
           <input
