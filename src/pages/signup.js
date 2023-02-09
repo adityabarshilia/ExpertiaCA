@@ -39,14 +39,14 @@ const Signup = () => {
             {hidePass ? (
               <BsEyeSlashFill
                 onClick={() => setHidePass(!hidePass)}
-                fontSize="22"
-                className="absolute top-7 right-3 cursor-pointer"
+                fontSize="23"
+                className="absolute top-[28px] right-[25px] cursor-pointer"
               />
             ) : (
               <BsEyeFill
                 onClick={() => setHidePass(!hidePass)}
-                fontSize="22"
-                className="absolute top-7 right-3 cursor-pointer"
+                fontSize="23"
+                className="absolute top-[28px] right-[25px] cursor-pointer"
               />
             )}
           </div>
@@ -61,14 +61,14 @@ const Signup = () => {
             {hideConfirm ? (
               <BsEyeSlashFill
                 onClick={() => setHideConfirm(!hideConfirm)}
-                fontSize="22"
-                className="absolute top-7 right-3 cursor-pointer"
+                fontSize="23"
+                className="absolute top-[28px] right-[25px] cursor-pointer"
               />
             ) : (
               <BsEyeFill
                 onClick={() => setHideConfirm(!hideConfirm)}
-                fontSize="22"
-                className="absolute top-7 right-3 cursor-pointer"
+                fontSize="23"
+                className="absolute top-[28px] right-[25px] cursor-pointer"
               />
             )}
           </div>
