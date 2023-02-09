@@ -4,11 +4,24 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 const Signin = () => {
   const [hidePass, setHidePass] = useState(true);
+  //Form Inputs
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      axios.post("/api/user/signin", { username, password });
+      alert("Signup successful!");
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   return (
     <div className="flex flex-row items-center justify-center lg:justify-between py-20 px-7 bg-[#faf9f9]">
       <div className="ml-[0px] lg:ml-[80px] border-[0.5px] rounded-[10px] shadow-[0_4px_64px_rgba(0,0,0,0.05)] border-[#cfcfcf] bg-white">
-        <form className="max-w-[505px] py-10 px-8">
+        <form onSubmit={handleSubmit} className="max-w-[505px] py-10 px-8">
           <p className="text-[25px] leading-[37.5px] mb-4 font-light">
             Welcome !
           </p>
@@ -18,6 +31,7 @@ const Signin = () => {
           <p className="mb-[35px] text-base">Lorem Ipsum is simply</p>
           <label>User name</label>
           <input
+            onChange={({ target }) => setUsername(target.value)}
             required
             type="text"
             className="mb-4 p-4 border-[0.6px] mt-[10px] rounded-[6px] border-[#888888] w-full"
@@ -26,6 +40,7 @@ const Signin = () => {
           <label>Password</label>
           <div className="relative">
             <input
+              onChange={({ target }) => setPassword(target.value)}
               required
               type={hidePass ? "password" : "text"}
               className="mb-4 p-4 border-[0.6px] mt-[10px] rounded-[6px] border-[#888888] w-full"
@@ -55,7 +70,10 @@ const Signin = () => {
                 id="rememberme"
                 name="rememberme"
               />
-              <label className="text-[12px] leading-[18px]" htmlFor="rememberme">
+              <label
+                className="text-[12px] leading-[18px]"
+                htmlFor="rememberme"
+              >
                 Remember me
               </label>
             </div>

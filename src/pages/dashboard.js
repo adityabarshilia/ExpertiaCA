@@ -11,7 +11,7 @@ const Dashboard = () => {
         <p className="text-[25px] leading-[37.5px] mb-4 font-light">Hello</p>
         <h1 className="text-[31px] leading-[46.5px] mb-4 font-[600]">John Doe</h1>
         <p className="mb-[40px]">Good to see you here!</p>
-        <h3 className="font-bold">Tasks for 24th Dec, 2022</h3>
+        <h3 className="font-bold">Tasks for 24th Dec, 2022 :</h3>
 
         <input
           required
@@ -26,7 +26,7 @@ const Dashboard = () => {
           value="Add New Task"
         />
 
-        <button className="text-[14px] leading-[21px] font-semibold m-auto block">Logout</button>
+        <button className="mt-2 text-[14px] leading-[21px] font-semibold m-auto block">Logout</button>
       </div>
     </div>
   );
