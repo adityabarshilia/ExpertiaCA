@@ -20,11 +20,6 @@ export default async function handler(req, res) {
         { $push: { tasks: task } }
       );
 
-      data = await UserModel.updateOne(
-        { _id: id },
-        { $pull: { tasks: { created: { $ne: task.created } } } }
-      );
-
       res.status(200).send(data);
     } catch (e) {
       res.status(400).send(e.message);

@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContextProvider";
+import jwt from "jsonwebtoken";
 
 const Signup = () => {
   const [hidePass, setHidePass] = useState(true);
@@ -16,6 +17,13 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  useEffect(() => {
+    if(auth.token) {
+      const user = jwt.decode(auth.token);
+      router.push(`/?id=${user.id}`);
+    }
+  },[auth]) 
 
   const SignIn = async () => {
     let res = await axios.post("/api/user/signin", {
@@ -37,7 +45,6 @@ const Signup = () => {
         if (res.data.user) {
           SignIn();
           alert("Signup successful!");
-          router.push("/");
         }
       } catch (err) {
         alert(err.response.data.message);

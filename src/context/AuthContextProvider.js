@@ -11,7 +11,7 @@ function getInitialState() {
 const AuthContextProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     message: "",
-    token: "",
+    token: ""
   });
 
   useEffect(() => {

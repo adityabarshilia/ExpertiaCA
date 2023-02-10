@@ -1,14 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import axios from "axios";
 import { AuthContext } from "@/context/AuthContextProvider";
 import { useRouter } from "next/router";
+import jwt from "jsonwebtoken";
 
 const Signin = () => {
   const [hidePass, setHidePass] = useState(true);
   const { auth, setAuth } = useContext(AuthContext);
   const router = useRouter();
+
+
+  useEffect(() => {
+    if(auth.token) {
+      const user = jwt.decode(auth.token);
+      router.push(`/?id=${user.id}`);
+    }
+  },[auth]) 
 
   //Form Inputs
   const [username, setUsername] = useState("");
@@ -21,10 +30,9 @@ const Signin = () => {
       if (res.data.message == "Logged in") {
         setAuth(res.data);
         alert("Login successful");
-        router.push("/");
       }
     } catch (err) {
-      alert(err.response.data.message);
+      return alert(err.response.data.message);
     }
   };
 
