@@ -50,7 +50,7 @@ const Dashboard = ({ oldTasks }) => {
       id,
       task: { name: str, created: currDate },
     });
-    router.push("/");
+    router.push(`/?id=${id}`);
   };
 
   return (
