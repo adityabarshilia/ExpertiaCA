@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "@/context/AuthContextProvider";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signin = () => {
   const [hidePass, setHidePass] = useState(true);
@@ -29,15 +30,18 @@ const Signin = () => {
       let res = await axios.post("/api/user/signin", { username, password });
       if (res.data.message == "Logged in") {
         setAuth(res.data);
-        alert("Login successful");
+        toast.success("Login successful");
       }
     } catch (err) {
-      return alert(err.response.data.message);
+      return toast.error(err.response.data.message);
     }
   };
 
   return (
     <div className="flex flex-row items-center justify-center lg:justify-between py-20 px-7 bg-[#faf9f9]">
+      <div>
+        <Toaster />
+      </div>
       <div className="ml-[0px] lg:ml-[80px] border-[0.5px] rounded-[10px] shadow-[0_4px_64px_rgba(0,0,0,0.05)] border-[#cfcfcf] bg-white">
         <form onSubmit={signInRequest} className="max-w-[505px] py-10 px-8">
           <p className="text-[25px] leading-[37.5px] mb-4 font-light">

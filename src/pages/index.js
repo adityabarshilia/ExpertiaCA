@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { connect } from "@/db.connect";
 import { UserModel } from "@/models/user.model";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const months = [
   "Jan",
@@ -38,6 +39,7 @@ const Dashboard = ({ oldTasks }) => {
 
   const logout = () => {
     setAuth("");
+    toast.success("You're logged out")
   };
 
   useEffect(() => {
@@ -51,10 +53,14 @@ const Dashboard = ({ oldTasks }) => {
       task: { name: str, created: currDate },
     });
     router.push(`/?id=${id}`);
+    toast.success("Task added!");
   };
 
   return (
     <div className="flex items-center justify-center min-h-[100vh] p-5">
+      <div>
+        <Toaster />
+      </div>
       <div className="p-7 max-w-[505px] border-[0.5px] rounded-[10px] shadow-[0_4px_64px_rgba(0,0,0,0.05)] border-[#cfcfcf] bg-white">
         <p className="text-[25px] leading-[37.5px] mb-4 font-light">Hello</p>
         <h1 className="text-[31px] leading-[46.5px] mb-4 font-[600]">
@@ -83,7 +89,7 @@ const Dashboard = ({ oldTasks }) => {
 
         <input
           onClick={() => {
-            if (Tasks.length === 5) return alert("Daily limit exceeded");
+            if (Tasks.length === 5) return toast.error("Daily limit exceeded");
             setStr("");
             updateTasks();
           }}

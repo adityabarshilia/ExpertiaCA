@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContextProvider";
 import jwt from "jsonwebtoken";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const [hidePass, setHidePass] = useState(true);
@@ -19,11 +20,11 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    if(auth.token) {
+    if (auth.token) {
       const user = jwt.decode(auth.token);
       router.push(`/?id=${user.id}`);
     }
-  },[auth]) 
+  }, [auth]);
 
   const SignIn = async () => {
     let res = await axios.post("/api/user/signin", {
@@ -44,12 +45,12 @@ const Signup = () => {
         });
         if (res.data.user) {
           SignIn();
-          alert("Signup successful!");
+          toast.success("Signup successful!");
         }
       } catch (err) {
-        alert(err.response.data.message);
+        toast.error(err.response.data.message);
       }
-    } else alert("Passwords do not match");
+    } else toast.error("Passwords do not match");
   };
 
   const validatePasswords = () => {
@@ -58,6 +59,9 @@ const Signup = () => {
   };
   return (
     <div className="flex flex-row items-center justify-center lg:justify-between py-20 px-7 bg-[#faf9f9]">
+      <div>
+        <Toaster />
+      </div>
       <div className="ml-[0px] lg:ml-[80px] border-[0.5px] rounded-[10px] shadow-[0_4px_64px_rgba(0,0,0,0.05)] border-[#cfcfcf] bg-white">
         <form onSubmit={signUpRequest} className="max-w-[505px] py-5 px-8">
           <p className="text-[25px] leading-[37.5px] mb-4 font-light">
