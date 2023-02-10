@@ -46,7 +46,7 @@ const Signin = () => {
           <h1 className="text-[31px] leading-[46.5px] font-[600]">
             Sign in to
           </h1>
-          <p className="mb-[35px] text-base">Lorem Ipsum is simply</p>
+          <p className="mb-[35px] text-base">Expertia's Todo App</p>
           <label>User name</label>
           <input
             onChange={({ target }) => setUsername(target.value)}

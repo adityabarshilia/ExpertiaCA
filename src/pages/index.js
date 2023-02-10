@@ -30,7 +30,7 @@ const Dashboard = ({ oldTasks }) => {
   const [str, setStr] = useState("");
   const { auth, setAuth } = useContext(AuthContext);
   const router = useRouter();
-  
+
   const data = jwt.decode(auth.token); //get details from token
 
   let Tasks = [...oldTasks];
@@ -40,16 +40,9 @@ const Dashboard = ({ oldTasks }) => {
     setAuth("");
   };
 
-  // useEffect(() => {
-  //   if (!auth) {
-  //     console.log(data.id)
-  //     router.push(`/?id=${data.id}`);
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (!auth) router.push("/signup");
-  },[auth]);
+  }, [auth]);
 
   const updateTasks = async () => {
     const { id } = data;
@@ -64,7 +57,9 @@ const Dashboard = ({ oldTasks }) => {
     <div className="flex items-center justify-center min-h-[100vh] p-5">
       <div className="p-7 max-w-[505px] border-[0.5px] rounded-[10px] shadow-[0_4px_64px_rgba(0,0,0,0.05)] border-[#cfcfcf] bg-white">
         <p className="text-[25px] leading-[37.5px] mb-4 font-light">Hello</p>
-        <h1 className="text-[31px] leading-[46.5px] mb-4 font-[600]">{data?.username}</h1>
+        <h1 className="text-[31px] leading-[46.5px] mb-4 font-[600]">
+          {data?.username}
+        </h1>
         <p className="mb-[40px]">Good to see you here!</p>
         <h3 className="font-bold">
           Tasks for {date.getDate()}th {months[date.getMonth()]},{" "}

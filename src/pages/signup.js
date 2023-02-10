@@ -66,7 +66,7 @@ const Signup = () => {
           <h1 className="text-[31px] leading-[46.5px] font-[600]">
             Sign up to
           </h1>
-          <p className="mb-[30px] text-base">Lorem Ipsum is simply</p>
+          <p className="mb-[30px] text-base">Expertia's Todo App</p>
           <label>Email</label>
           <input
             onChange={({ target }) => setEmail(target.value)}
