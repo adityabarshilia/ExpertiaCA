@@ -113,25 +113,28 @@ export const getServerSideProps = async (ctx) => {
   const { id } = data;
   let oldTasks;
 
-  try {
-    await connect();
-  } catch (e) {
-    console.log(e);
-  }
+  if (data) {
+    try {
+      await connect();
+    } catch (e) {
+      console.log(e);
+    }
 
-  try {
-    //removing tasks not of the same day
-    await UserModel.updateOne(
-      { _id: id },
-      { $pull: { tasks: { created: { $ne: currDate } } } }
-    );
+    try {
+      //removing tasks not of the same day
+      await UserModel.updateOne(
+        { _id: id },
+        { $pull: { tasks: { created: { $ne: currDate } } } }
+      );
 
-    const user = await UserModel.findOne({ _id: id });
-    oldTasks = user.tasks;
-  } catch (e) {
-    console.log(e);
+      const user = await UserModel.findOne({ _id: id });
+      oldTasks = user.tasks;
+    } catch (e) {
+      console.log(e);
+    }
+  }else{
+    oldTasks = [];
   }
-  console.log(oldTasks);
   return {
     props: {
       oldTasks,
