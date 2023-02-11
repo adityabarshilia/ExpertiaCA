@@ -27,19 +27,17 @@ let currDate = `${date.getDate()}${
   months[date.getMonth()]
 }${date.getFullYear()}`;
 
-const Dashboard = ({ oldTasks }) => {
+const Dashboard = ({ oldTasks, data }) => {
   const [str, setStr] = useState("");
   const { auth, setAuth } = useContext(AuthContext);
   const router = useRouter();
-
-  const data = jwt.decode(auth.token); //get details from token
 
   let Tasks = [...oldTasks];
   Tasks = Tasks.reduce((a, e) => [...a, e.name], []);
 
   const logout = () => {
     setAuth("");
-    toast.success("You're logged out")
+    toast.success("You're logged out");
   };
 
   useEffect(() => {
@@ -111,8 +109,8 @@ const Dashboard = ({ oldTasks }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const { query } = ctx;
-  const { id } = query;
+  const data = jwt.decode(ctx.req.cookies.expertia); //get details from token
+  const { id } = data;
   let oldTasks;
 
   try {
@@ -133,10 +131,11 @@ export const getServerSideProps = async (ctx) => {
   } catch (e) {
     console.log(e);
   }
-
+  console.log(oldTasks);
   return {
     props: {
       oldTasks,
+      data,
     },
   };
 };

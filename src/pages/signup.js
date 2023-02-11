@@ -20,8 +20,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    if (auth.token) {
-      const user = jwt.decode(auth.token);
+    if (auth) {
+      const user = jwt.decode(auth);
       router.push(`/?id=${user.id}`);
     }
   }, [auth]);
@@ -31,7 +31,7 @@ const Signup = () => {
       username,
       password,
     });
-    if (res.data.message == "Logged in") setAuth(res.data);
+    if (res.data.message == "Logged in") setAuth(res.data.token);
   };
 
   const signUpRequest = async (e) => {

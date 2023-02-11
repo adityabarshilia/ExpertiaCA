@@ -1,25 +1,19 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
 
 function getInitialState() {
-  const initState = localStorage.getItem("expertia");
-  return initState ? JSON.parse(initState) : "";
+  const initState = Cookies.get("expertia");
+  return initState ? initState : "";
 }
 
 const AuthContextProvider = ({ children }) => {
-  const [auth, setAuth] = useState({
-    message: "",
-    token: ""
-  });
+  const [auth, setAuth] = useState(getInitialState);
 
   useEffect(() => {
-    setAuth(getInitialState);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("expertia", JSON.stringify(auth));
+    Cookies.set("expertia", auth, { expires: 365 });
   }, [auth]);
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

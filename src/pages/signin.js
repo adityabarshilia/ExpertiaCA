@@ -12,13 +12,12 @@ const Signin = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const router = useRouter();
 
-
   useEffect(() => {
-    if(auth.token) {
-      const user = jwt.decode(auth.token);
+    if (auth) {
+      const user = jwt.decode(auth);
       router.push(`/?id=${user.id}`);
     }
-  },[auth]) 
+  }, [auth]);
 
   //Form Inputs
   const [username, setUsername] = useState("");
@@ -29,7 +28,7 @@ const Signin = () => {
     try {
       let res = await axios.post("/api/user/signin", { username, password });
       if (res.data.message == "Logged in") {
-        setAuth(res.data);
+        setAuth(res.data.token);
         toast.success("Login successful");
       }
     } catch (err) {
