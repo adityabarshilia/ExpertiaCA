@@ -110,10 +110,12 @@ const Dashboard = ({ oldTasks, data }) => {
 
 export const getServerSideProps = async (ctx) => {
   const data = jwt.decode(ctx.req.cookies.expertia); //get details from token
-  const { id } = data;
+
   let oldTasks;
 
   if (data) {
+    const { id } = data;
+    
     try {
       await connect();
     } catch (e) {
@@ -132,7 +134,7 @@ export const getServerSideProps = async (ctx) => {
     } catch (e) {
       console.log(e);
     }
-  }else{
+  } else {
     oldTasks = [];
   }
   return {
