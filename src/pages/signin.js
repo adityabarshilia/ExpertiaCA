@@ -6,11 +6,13 @@ import { AuthContext } from "@/context/AuthContextProvider";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
 import toast, { Toaster } from "react-hot-toast";
+import { Oval } from "react-loader-spinner";
 
 const Signin = () => {
   const [hidePass, setHidePass] = useState(true);
   const { auth, setAuth } = useContext(AuthContext);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (auth) {
@@ -26,11 +28,13 @@ const Signin = () => {
   const signInRequest = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       let res = await axios.post("/api/user/signin", { username, password });
       if (res.data.message == "Logged in") {
         setAuth(res.data.token);
         toast.success("Login successful");
       }
+      setLoading(false);
     } catch (err) {
       return toast.error(err.response.data.message);
     }
@@ -103,11 +107,28 @@ const Signin = () => {
             </p>
           </div>
 
-          <input
-            type="submit"
-            className="text-lg my-2 p-4 transition-all border-[0.6px] rounded-[6px] border-[#888888] w-full bg-black text-white hover:bg-white cursor-pointer hover:text-black hover hover:border-black"
-            value="Login"
-          />
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <Oval
+                height={40}
+                width={40}
+                color="white"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="black"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
+            <input
+              type="submit"
+              className="text-lg my-2 p-4 transition-all border-[0.6px] rounded-[6px] border-[#888888] w-full bg-black text-white hover:bg-white cursor-pointer hover:text-black hover hover:border-black"
+              value="Login"
+            />
+          )}
 
           <p className="mt-[20px] text-center text-[#7D7D7D] w-full">
             Don't have an account ? {"  "}

@@ -5,11 +5,13 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContextProvider";
 import jwt from "jsonwebtoken";
+import { Oval } from "react-loader-spinner";
 import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const [hidePass, setHidePass] = useState(true);
   const [hideConfirm, setHideConfirm] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
   const router = useRouter();
 
@@ -38,6 +40,7 @@ const Signup = () => {
     e.preventDefault();
     if (validatePasswords()) {
       try {
+        setLoading(true);
         let res = await axios.post("/api/user/signup", {
           username,
           email,
@@ -51,6 +54,7 @@ const Signup = () => {
         toast.error(err.response.data.message);
       }
     } else toast.error("Passwords do not match");
+    setLoading(false);
   };
 
   const validatePasswords = () => {
@@ -134,11 +138,29 @@ const Signup = () => {
               />
             )}
           </div>
-          <input
-            type="submit"
-            className="text-lg my-2 p-4 transition-all border-[0.6px] rounded-[6px] border-[#888888] w-full bg-black text-white hover:bg-white cursor-pointer hover:text-black hover hover:border-black"
-            value="Register"
-          />
+
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <Oval
+                height={40}
+                width={40}
+                color="white"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="black"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
+            <input
+              type="submit"
+              className="text-lg my-2 p-4 transition-all border-[0.6px] rounded-[6px] border-[#888888] w-full bg-black text-white hover:bg-white cursor-pointer hover:text-black hover hover:border-black"
+              value="Register"
+            />
+          )}
 
           <p className="mt-[20px] text-center text-[#7D7D7D] w-full">
             Already have an account ? {"  "}
